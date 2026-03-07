@@ -12,6 +12,140 @@
 
   <title>Holden Green</title>
   <style>
+    /* Body overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 30, 30, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 5;
+    }
+
+    body:has(.gallery-wrapper img:hover)::before {
+      opacity: 1;
+    }
+
+    /* Gallery wrapper: flex to hold columns */
+    .gallery-wrapper {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Columns: use CSS columns for masonry */
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Transform origin per column */
+    .column.left img {
+      transform-origin: left center;
+    }
+
+    .column.middle img {
+      transform-origin: center center;
+    }
+
+    .column.right img {
+      transform-origin: right center;
+    }
+
+    /* Images */
+    .column img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.35s ease, z-index 0s;
+      position: relative;
+      z-index: 1;
+      object-fit: contain;
+      /* prevent zoom overflow */
+    }
+
+    /* Zoom effect */
+    .column img:hover {
+      transform: scale(2.1);
+      z-index: 10;
+      max-height: 50svh;
+      max-width: 90svh;
+    }
+
+    /* Responsive: stack columns */
+    @media (max-width: 900px) {
+      .gallery-wrapper {
+        flex-direction: column;
+        max-height: 50svh;
+      }
+
+      .column img:hover {
+        transform: scale(2.1);
+        z-index: 10;
+        max-height: 30svh;
+        max-width: 90svh;
+      }
+
+      .column.left img {
+        transform-origin: center center;
+      }
+
+      .column.middle img {
+        transform-origin: center center;
+      }
+
+      .column.right img {
+        transform-origin: center center;
+      }
+
+      /* 2 columns if desired, just remove the 3rd column */
+    }
+
+    @media (max-width: 500px) {
+      .gallery-wrapper {
+        flex-direction: column;
+        max-height: 50svh;
+      }
+
+      .column img:hover {
+        transform: scale(2.1);
+        z-index: 10;
+        max-height: 30svh;
+        max-width: 75svh;
+      }
+
+      .column.left img {
+        transform-origin: center center;
+      }
+
+      .column.middle img {
+        transform-origin: center center;
+      }
+
+      .column.right img {
+        transform-origin: center center;
+      }
+
+      /* stack all images */
+      .column img {
+        transform-origin: center center;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
     /* Add a little space under the navbar */
     .navbar {
       margin-bottom: 30px;
@@ -99,9 +233,9 @@
           </a>
           <div class="navbar-nav">
             <a class="nav-item nav-link link-in-navbar" href="#recent-work">Recent Work</a>
+            <a class="nav-item nav-link link-in-navbar" href="#photos">Photos</a>
             <!-- <a class="nav-item nav-link link-in-navbar" href="#">Data</a>
           <a class="nav-item nav-link link-in-navbar" href="#">Videos</a>
-          <a class="nav-item nav-link link-in-navbar" href="#">Photos</a>
           <a class="nav-item nav-link link-in-navbar" href="#">Audio</a> -->
             <!-- MAKE THESE HEADERS LINK TO PARTS OF MY 1-PAGE SCROLL (eg. 'RECENT WORK', 'PHOTOGRAPHY', 'VIDEOS', ETC) -->
           </div>
@@ -140,7 +274,8 @@
             <i>Chicago</i>-based multimedia
             journalist. He is currently a <span class="intro-highlight">Data Journalism MS Student</span> at the
             Columbia
-            Journalism School and a <span class="intro-highlight">Breaking News Contributor</span> at The Daily Herald.
+            Journalism School and a <span class="intro-highlight">Breaking News Contributor</span> at The Daily
+            Herald.
           </h2>
         </div>
         <div class="col-sm-4">
@@ -187,7 +322,8 @@
                 <span class="badge text-bg-secondary">R/ggplot</span>
               </h6>
               <h5 class="card-text mt-3">A story walking through snapshot from
-                <strong style="background: #E94F37">one statistically average American day of activities</strong>, based
+                <strong style="background: #E94F37">one statistically average American day of activities</strong>,
+                based
                 on data from the annual American Time Use Survey.
               </h5>
               <a href="https://hgorledeenn.github.io/one-american-day/" class="stretched-link" target="_blank"></a>
@@ -246,7 +382,8 @@
                 <span class="badge text-bg-secondary">For Loops</span>
               </h6>
               <h5 class="card-text mt-3">An "In One Chart" story analyzing
-                <strong style="background: #E94F37">the gender split of the name Morgan</strong> based on SSA data and a
+                <strong style="background: #E94F37">the gender split of the name Morgan</strong> based on SSA data and
+                a
                 self-designed survey.
               </h5>
               <a href="https://hgorledeenn.github.io/baby-names-IOC/" class="stretched-link" target="_blank"></a>
@@ -254,6 +391,56 @@
           </div>
         </div>
 
+        <div class="row mt-5">
+          <div class="col-sm-8">
+            <h1 id="photos"><strong class="section-header px-2">Photos</strong></h1>
+          </div>
+        </div>
+
+
+        <div class="gallery-wrapper mt-3">
+          <div class="column left">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-01.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-02.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-03.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-18.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-19.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-20.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-21.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-22.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-23.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-24.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-30.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-34.jpg">
+          </div>
+          <div class="column center">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-04.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-05.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-06.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-14.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-15.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-16.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-17.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-25.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-26.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-29.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-33.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-35.jpg">
+          </div>
+          <div class="column right">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-07.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-08.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-09.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-10.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-11.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-12.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-13.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-27.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-28.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-31.jpg">
+            <img src="/docs/pictures/nice_photos/HG-portfolio-32.jpg">
+          </div>
+        </div>
 
       </div>
     </div>
