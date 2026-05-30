@@ -76,63 +76,37 @@
       max-width: 90svh;
     }
 
-    /* Responsive: stack columns */
+    /* Tablet: recenter transform-origin (also fixes dead .column.middle rule — HTML uses .column.center) */
     @media (max-width: 900px) {
-      .gallery-wrapper {
-        flex-direction: column;
-        max-height: 50svh;
-      }
-
-      .column img:hover {
-        transform: scale(2.1);
-        z-index: 10;
-        max-height: 30svh;
-        max-width: 90svh;
-      }
-
-      .column.left img {
-        transform-origin: center center;
-      }
-
-      .column.middle img {
-        transform-origin: center center;
-      }
-
+      .column.left img,
+      .column.center img,
       .column.right img {
         transform-origin: center center;
       }
-
-      /* 2 columns if desired, just remove the 3rd column */
     }
 
-    @media (max-width: 500px) {
+    /* Mobile: stack gallery to single scrollable column, no height clip */
+    @media (max-width: 575.98px) {
       .gallery-wrapper {
         flex-direction: column;
-        max-height: 50svh;
       }
+    }
 
+    /* Touch devices: disable hover zoom and dark overlay; add card press-down */
+    @media (hover: none) {
       .column img:hover {
-        transform: scale(2.1);
-        z-index: 10;
-        max-height: 30svh;
-        max-width: 75svh;
+        transform: none;
+        z-index: 1;
+        max-height: unset;
+        max-width: unset;
       }
 
-      .column.left img {
-        transform-origin: center center;
+      body:has(.gallery-wrapper img:hover)::before {
+        opacity: 0;
       }
 
-      .column.middle img {
-        transform-origin: center center;
-      }
-
-      .column.right img {
-        transform-origin: center center;
-      }
-
-      /* stack all images */
-      .column img {
-        transform-origin: center center;
+      .card:active {
+        transform: scale(0.97);
       }
     }
 
@@ -163,6 +137,7 @@
     .card:hover {
       transform: scale(1.035);
     }
+
 
     .icon {
       transition: all 0.3s ease;
@@ -215,21 +190,26 @@
 <body>
   <div class="site">
     <!-- As a link -->
-    <nav class="navbar navbar-expand border-bottom sticky-top bg-blur" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md border-bottom sticky-top bg-blur" data-bs-theme="dark">
       <div class="container-fluid">
-        <div class="collapse navbar-collapse align-items-center">
-          <a class="navbar-brand me-4 ms-5" href="https://hgorledeenn.github.io" style="color:#b3b3b3">
-            <h2>Holden Green</h2>
-          </a>
-          <div class="navbar-nav">
+
+        <a class="navbar-brand ms-3 ms-md-5" href="https://hgorledeenn.github.io" style="color:#b3b3b3">
+          <h2 class="mb-0">Holden Green</h2>
+        </a>
+
+        <button class="navbar-toggler me-3" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarContent"
+          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse align-items-center" id="navbarContent">
+          <div class="navbar-nav ms-md-4">
             <a class="nav-item nav-link link-in-navbar" href="#recent-work">Recent Work</a>
             <a class="nav-item nav-link link-in-navbar" href="#videos-and-audio">Video/Audio</a>
             <a class="nav-item nav-link link-in-navbar" href="#photos">Photos</a>
-            <!-- <a class="nav-item nav-link link-in-navbar" href="#">Data</a>
-          <a class="nav-item nav-link link-in-navbar" href="#">Audio</a> -->
-            <!-- MAKE THESE HEADERS LINK TO PARTS OF MY 1-PAGE SCROLL (eg. 'RECENT WORK', 'PHOTOGRAPHY', 'VIDEOS', ETC) -->
           </div>
-          <div class="navbar-nav ms-auto">
+          <div class="navbar-nav ms-auto flex-row gap-2 me-3 me-md-5">
             <a href="https://www.linkedin.com/in/holden-green-me" target="_blank" class="navbar-brand"
               style="color:#b3b3b3">
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -243,7 +223,7 @@
                 <path
                   d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
               </svg></a>
-            <a href="https://www.instagram.com/holdengreen.me" target="_blank" class="navbar-brand social-icon me-5"
+            <a href="https://www.instagram.com/holdengreen.me" target="_blank" class="navbar-brand social-icon"
               style="color:#b3b3b3">
               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                 class="bi bi-instagram icon" viewBox="0 0 16 16">
@@ -252,8 +232,8 @@
               </svg></a>
           </div>
         </div>
-      </div>
 
+      </div>
     </nav>
 
     <div class="container pb-4">
@@ -268,7 +248,7 @@
             Herald.
           </h2>
         </div>
-        <div class="col-sm-4">
+        <div class="col-8 col-sm-4 offset-2 offset-sm-0 mt-3 mt-sm-0">
           <img src="pictures/headshot_homepage.jpeg" class="img-fluid" loading="eager">
         </div>
       </div>
@@ -280,7 +260,7 @@
       </div>
 
       <div class="row mt-3 mb-4">
-        <div class="col-sm-4 mb-4">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4">
           <div class="card">
             <img class="card-img-top" src="pictures/frank-tottenham.png"
               alt="Win/Loss/Draw rates for Tottenham Coaches">
@@ -301,7 +281,7 @@
           </div>
         </div>
 
-        <div class="col-sm-4 mb-4">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4">
           <div class="card">
             <img class="card-img-top" src="pictures/one_american_day_new.gif"
               alt="The title section of my One American Day story"></a>
@@ -321,7 +301,7 @@
           </div>
         </div>
 
-        <div class="col-sm-4 mb-4">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4">
           <div class="card">
             <img class="card-img-top img-grow img-grow:hover" src="pictures/chicago-reimbursements-site.jpg"
               alt="Chicago Reimbursements Site">
@@ -343,7 +323,7 @@
           </div>
         </div>
 
-        <div class="col-sm-4 mb-4">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4">
           <div class="card">
             <img class="card-img-top" src="pictures/in-one-chart_forest_hills.jpg" alt="In One Chart viz"></a>
             <div class="card-body">
@@ -361,7 +341,7 @@
           </div>
         </div>
 
-        <div class="col-sm-4 mb-4" id="story5 duke_uconn">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4" id="story5 duke_uconn">
           <div class="card">
             <img class="card-img-top" src="pictures/duke_uconn_game.gif" alt="Duke UConn Game Analysis"></a>
             <div class="card-body">
@@ -380,7 +360,7 @@
         </div>
 
 
-        <div class="col-sm-4 mb-4">
+        <div class="col-11 col-sm-4 mx-auto mx-sm-0 mb-4">
           <div class="card">
             <img class="card-img-top" src="pictures/morgan_in_one_chart_small.gif" alt="Baby Names In One Chart"></a>
             <div class="card-body">
@@ -417,7 +397,7 @@
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
-        <div class="col-sm-5 pe-sm-4">
+        <div class="col-sm-5 pe-sm-4 ps-sm-4 mt-3 mt-sm-0">
           <h4>Pep Band</h4>
           <p class="text-secondary mb-2"><small>December 2022</small></p>
           <p>A project I filmed and produced by myself in December 2022, profiling Mack Shanker, a transfer student
@@ -430,7 +410,7 @@
       </div>
 
       <div class="row mt-4 mb-5 align-items-center">
-        <div class="col-sm-5 pe-sm-4">
+        <div class="col-sm-5 pe-sm-4 ps-sm-4 mt-3 mt-sm-0 order-2 order-sm-1">
           <h4>"Zcavenger" Hunt Audio Postcard</h4>
           <p class="text-secondary mb-2"><small>August 2025</small></p>
           <p>An audio postcard I reported and produced as part of a 3-day audio workshop led by The Daily producer
@@ -438,7 +418,7 @@
             campaign event hosted by the Mamdani mayoral campaign, and the following two days writing the script,
             editing the clips and recording my voiceover.</p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7 order-1 order-sm-2">
           <div class="ratio ratio-16x9">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/6JqmsqZiWA8?si=Pxk6xsfutAyAfx2g"
               title="YouTube video player" frameborder="0"
@@ -457,7 +437,7 @@
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
-        <div class="col-sm-5 pe-sm-4">
+        <div class="col-sm-5 pe-sm-4 ps-sm-4 mt-3 mt-sm-0">
           <h4>Campus Plan</h4>
           <p class="text-secondary mb-2"><small>August 2024</small></p>
           <p>This video details a newly-released document from Loyola University Chicago with all of their future plans
@@ -472,13 +452,13 @@
       </div>
 
       <div class="row mt-4 mb-5 align-items-center">
-        <div class="col-sm-5 pe-sm-4">
+        <div class="col-sm-5 pe-sm-4 ps-sm-4 mt-3 mt-sm-0 order-2 order-sm-1">
           <h4>Uncharted Books Profile</h4>
           <p class="text-secondary mb-2"><small>September 2022</small></p>
           <p>A profile of the Uncharted Books bookstore in the Andersonville neighborhood of Chicago. Filmed in
             September 2022 with Hunter Minné and Makayla Merrell and edited by myself.</p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7 order-1 order-sm-2">
           <div class="ratio ratio-16x9">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/Eu9yFAr5lzs?si=ZOIWO2MFC95pkkd1"
               title="YouTube video player" frameborder="0"
@@ -545,6 +525,17 @@
         <h6 style="color: #C1C1C1">Copyright Holden Green, 2026</h6>
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"></script>
+    <script>
+      document.querySelectorAll('#navbarContent .nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+          var bsCollapse = bootstrap.Collapse.getInstance(document.getElementById('navbarContent'));
+          if (bsCollapse) bsCollapse.hide();
+        });
+      });
+    </script>
 </body>
 
 </html>
