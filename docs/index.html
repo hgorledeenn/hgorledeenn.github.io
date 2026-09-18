@@ -78,6 +78,7 @@
 
     /* Tablet: recenter transform-origin (also fixes dead .column.middle rule — HTML uses .column.center) */
     @media (max-width: 900px) {
+
       .column.left img,
       .column.center img,
       .column.right img {
@@ -169,6 +170,27 @@
       color: #E94F37
     }
 
+    .link-header-no-highlight {
+      text-decoration: none;
+      color: #6c747d
+    }
+
+    .link-header-no-highlight:hover {
+      /* color: #E94F37; */
+      color: #6c747d;
+      background: #1982C4;
+    }
+
+    .link-highlight {
+      color: #E94F37;
+      text-decoration: none;
+    }
+
+    .link-highlight:hover {
+      color: #E94F37;
+      background: #1982C4;
+    }
+
     /* Make the footer look nice */
     .footer {
       background: #E94F37;
@@ -197,8 +219,7 @@
           <h2 class="mb-0">Holden Green</h2>
         </a>
 
-        <button class="navbar-toggler me-3" type="button"
-          data-bs-toggle="collapse" data-bs-target="#navbarContent"
+        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
           aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -210,9 +231,12 @@
             <a class="nav-item nav-link link-in-navbar" href="#photos">Photos</a>
           </div>
           <div class="navbar-nav ms-auto flex-row gap-2 me-3 me-md-5">
-            <a href="mailto:holdengreen.me@gmail.com" target="_blank" class="navbar-brand social-icon" style="color:#b3b3b3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope-fill icon" viewBox="0 0 16 16">
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+            <a href="mailto:holdengreen.me@gmail.com" target="_blank" class="navbar-brand social-icon"
+              style="color:#b3b3b3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                class="bi bi-envelope-fill icon" viewBox="0 0 16 16">
+                <path
+                  d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
               </svg></a>
             <a href="https://www.linkedin.com/in/holden-green-me" target="_blank" class="navbar-brand"
               style="color:#b3b3b3">
@@ -246,10 +270,12 @@
           <h2 class="text-secondary" id="intro-text"><strong class="intro-highlight">Holden Green</strong> is a <i>New
               York City</i> and
             <i>Chicago</i>-based multimedia
-            journalist. He is currently a <span class="intro-highlight">Data Journalism MS Student</span> at the
-            Columbia
-            Journalism School and a <span class="intro-highlight">Breaking News Contributor</span> at The Daily
-            Herald.
+            journalist. He is currently a <span class="intro-highlight">Graphics Editor</span> at <a
+              class="link-highlight" href="https://www.law360.com" target="_blank">Law360</a> and an <a
+              class="link-header-no-highlight" href="https://hgorledeenn.github.io/chi_noise_map/"
+              target="_blank">alum</a> of the
+            <a class="link-header-no-highlight" href="https://journalism.columbia.edu" target="_blank">Columbia
+              Journalism School</a> Data Journalism MS program.
           </h2>
         </div>
         <div class="col-8 col-sm-4 offset-2 offset-sm-0 mt-3 mt-sm-0">
@@ -533,8 +559,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"></script>
     <script>
-      document.querySelectorAll('#navbarContent .nav-link').forEach(function(link) {
-        link.addEventListener('click', function() {
+      document.querySelectorAll('#navbarContent .nav-link').forEach(function (link) {
+        link.addEventListener('click', function () {
           var bsCollapse = bootstrap.Collapse.getInstance(document.getElementById('navbarContent'));
           if (bsCollapse) bsCollapse.hide();
         });
